@@ -2,4 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="colorPrimary">#FF4081</color> <!-- Puedes cambiar el valor hexadecimal a tu color deseado -->
+    <color name="colorCancel">#FF4081</color> <!-- Puedes cambiar el valor hexadecimal a tu color deseado -->
+    <color name="colorAccept">#69FF40</color>
 </resources>

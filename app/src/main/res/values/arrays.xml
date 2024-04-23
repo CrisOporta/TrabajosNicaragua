@@ -1,0 +1,22 @@
+<resources>
+    <string-array name="job_categories">
+        <item>Programación</item>
+        <item>Diseño gráfico</item>
+        <item>Medicina y salud</item>
+        <item>Ingeniería</item>
+        <item>Arquitectura</item>
+        <item>Finanzas</item>
+        <item>Telecomunicaciones</item>
+        <item>Arte y entretenimiento</item>
+        <item>Marketing digital</item>
+        <item>Desarrollo de aplicaciones móviles</item>
+        <item>Administración de empresas</item>
+        <item>Desarrollo web</item>
+        <item>Recursos humanos</item>
+        <item>Ventas y atención al cliente</item>
+        <item>Contabilidad</item>
+        <item>Periodismo</item>
+        <item>Educación</item>
+        <!-- Puedes agregar más categorías según necesites -->
+    </string-array>
+</resources>
