@@ -14,8 +14,12 @@
         android:gravity="center"
         android:orientation="vertical"
         android:padding="40dp"
+<<<<<<< HEAD
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="-27dp">
+=======
+        android:background="@drawable/bg_color_main">
+>>>>>>> 23230e000a830bdbd174bab99f51d200a3e42bf4
 
         <TextView
             android:id="@+id/textView"
