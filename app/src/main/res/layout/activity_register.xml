@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,21 +8,29 @@
 
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="410dp"
+        android:layout_height="785dp"
+        android:background="@drawable/bg_color_main"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="40dp"
-        android:background="@drawable/bg_color_login">
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-27dp">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="349dp"
             android:layout_height="60dp"
-            android:layout_margin="16dp"
+            android:layout_marginBottom="5dp"
             android:gravity="center"
-            android:text="Registro"
+            android:text="Registrar usuario"
             android:textSize="36dp" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="223dp"
+            android:layout_height="65dp"
+            app:srcCompat="@drawable/registration" />
 
         <EditText
             android:id="@+id/a1"
@@ -33,6 +42,7 @@
             android:layout_marginBottom="5dp"
             android:hint="Nombre(s)"
             android:textSize="25dp" />
+
         <EditText
             android:id="@+id/a2"
             android:layout_width="match_parent"
@@ -43,6 +53,7 @@
             android:layout_marginBottom="5dp"
             android:hint="Apellido(s)"
             android:textSize="25dp" />
+
         <EditText
             android:id="@+id/a3"
             android:layout_width="match_parent"
@@ -53,6 +64,7 @@
             android:layout_marginBottom="5dp"
             android:hint="Correo electrónico"
             android:textSize="25dp" />
+
         <EditText
             android:id="@+id/a4"
             android:layout_width="match_parent"
@@ -63,6 +75,7 @@
             android:layout_marginBottom="5dp"
             android:hint="Contraseña"
             android:textSize="25dp" />
+
         <EditText
             android:id="@+id/a5"
             android:layout_width="match_parent"
@@ -89,11 +102,12 @@
             android:layout_height="60dp"
             android:layout_below="@id/editTextPassword"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:backgroundTint="#42B72A"
             android:text="Registrarse"
             android:textSize="25dp" />
+
         <Button
             android:id="@+id/buttonRegister2"
             android:layout_width="wrap_content"
@@ -103,7 +117,6 @@
             android:backgroundTint="#6C757D"
             android:text="Regresar"
             android:textSize="25dp" />
-
 
 
     </LinearLayout>
