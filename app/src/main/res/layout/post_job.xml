@@ -20,14 +20,11 @@
             android:id="@+id/textView"
             android:layout_width="349dp"
             android:layout_height="60dp"
-<<<<<<< HEAD
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="14dp"
-=======
             android:layout_margin="16dp"
->>>>>>> 23230e000a830bdbd174bab99f51d200a3e42bf4
             android:gravity="center"
             android:text="Registrar empleo"
             android:textSize="36dp" />
@@ -37,10 +34,7 @@
             android:layout_width="139dp"
             android:layout_height="98dp"
             android:layout_gravity="center"
-<<<<<<< HEAD
             android:layout_marginBottom="10dp"
-=======
->>>>>>> 23230e000a830bdbd174bab99f51d200a3e42bf4
             android:src="@drawable/post_job_icon"
             app:layout_constraintBottom_toTopOf="@+id/editTextTitle"
             app:layout_constraintEnd_toEndOf="parent"
@@ -108,13 +102,8 @@
             android:layout_height="60dp"
             android:layout_below="@id/editTextPassword"
             android:layout_centerHorizontal="true"
-<<<<<<< HEAD
             android:layout_marginTop="10dp"
             android:layout_marginBottom="8dp"
-=======
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="10dp"
->>>>>>> 23230e000a830bdbd174bab99f51d200a3e42bf4
             android:backgroundTint="#42B72A"
             android:text="Registrar"
             android:textSize="25dp" />
