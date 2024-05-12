@@ -2,6 +2,7 @@ package com.example.trabajosnicaragua;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +10,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.List;
+
+import models.Usuario;
 
 public class LoginActivity extends AppCompatActivity  {
 
@@ -22,6 +27,21 @@ public class LoginActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        DBHelper dbHelper = new DBHelper(this);
+
+        List<Usuario> usuarios = dbHelper.getAllUsuarios();
+
+// Ahora puedes trabajar con la lista de usuarios, por ejemplo, imprimirlos en el log:
+        for (Usuario usuario : usuarios) {
+            Log.d("Usuario", "ID: " + usuario.getId() +
+                    ", Nombre: " + usuario.getNombre() +
+                    ", Apellido: " + usuario.getApellido() +
+                    ", Email: " + usuario.getEmail() +
+                    ", Contraseña: " + usuario.getContraseña() +
+                    ", Rol: " + usuario.getRol() +
+                    ", Verificado: " + usuario.getVerificado());
+        }
 
         editTextUsername = findViewById(R.id.editTextUsername);
         editTextPassword = findViewById(R.id.editTextPassword);

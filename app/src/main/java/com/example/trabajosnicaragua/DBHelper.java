@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import models.Usuario;
 
 public class DBHelper extends SQLiteOpenHelper {
@@ -166,7 +169,7 @@ public class DBHelper extends SQLiteOpenHelper {
     // CRUD Usuario
     //---------------------------------------------
     // Create Usuario
-    public void addUsuario(Usuario usuario) {
+    public Boolean addUsuario(Usuario usuario) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("nombre", usuario.getNombre());
@@ -177,6 +180,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put("verificado", usuario.getVerificado());
         db.insert("Usuarios", null, values);
         db.close();
+        return true;
     }
     // Read Usuario
     public Usuario getUsuarioById(int id) {
@@ -228,7 +232,49 @@ public class DBHelper extends SQLiteOpenHelper {
                 new String[]{String.valueOf(usuario.getId())});
         db.close();
     }
+    // Read All Usuarios
+    public List<Usuario> getAllUsuarios() {
+        List<Usuario> usuarios = new ArrayList<>();
+        String selectQuery = "SELECT * FROM Usuarios";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
 
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                int idIndex = cursor.getColumnIndex("id");
+                int nombreIndex = cursor.getColumnIndex("nombre");
+                int apellidoIndex = cursor.getColumnIndex("apellido");
+                int emailIndex = cursor.getColumnIndex("email");
+                int contraseñaIndex = cursor.getColumnIndex("contraseña");
+                int rolIndex = cursor.getColumnIndex("rol");
+                int verificadoIndex = cursor.getColumnIndex("verificado");
+
+                Usuario usuario = new Usuario(
+                        cursor.getInt(idIndex),
+                        cursor.getString(nombreIndex),
+                        cursor.getString(apellidoIndex),
+                        cursor.getString(emailIndex),
+                        cursor.getString(contraseñaIndex),
+                        cursor.getString(rolIndex),
+                        cursor.getInt(verificadoIndex));
+
+                usuarios.add(usuario);
+            } while (cursor.moveToNext());
+        }
+        if (cursor != null) {
+            cursor.close();
+        }
+        return usuarios;
+    }
+    // Count Usuario
+    public int getUsuariosCount() {
+        String countQuery = "SELECT  * FROM Usuarios";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int count = cursor.getCount();
+        cursor.close();
+        return count;
+    }
 
 
 }
