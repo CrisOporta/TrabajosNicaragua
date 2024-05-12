@@ -12,8 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity  {
 
-    private static final String CORRECT_USERNAME = "";
-    private static final String CORRECT_PASSWORD = "";
+    private static final String CORRECT_USERNAME = "admin";
+    private static final String CORRECT_PASSWORD = "admin";
 
     private EditText editTextUsername;
     private EditText editTextPassword;
@@ -27,10 +27,17 @@ public class LoginActivity extends AppCompatActivity  {
         editTextPassword = findViewById(R.id.editTextPassword);
 
         Button buttonLogin = findViewById(R.id.buttonLogin);
+        Button buttonRegister = findViewById(R.id.buttonRegister);
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 login();
+            }
+        });
+        buttonRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                register();
             }
         });
     }
@@ -49,5 +56,10 @@ public class LoginActivity extends AppCompatActivity  {
         } else {
             Toast.makeText(this, "¡Credenciales incorrectos!", Toast.LENGTH_SHORT).show();
         }
+    }
+    private void register() {
+        Intent intent = new Intent(this, AddUsuarioActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
