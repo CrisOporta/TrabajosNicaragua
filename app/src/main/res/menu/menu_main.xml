@@ -1,20 +1,18 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.trabajosnicaragua.MainActivity">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:id="@+id/navigation_jobs"
+        android:icon="@drawable/jobs_icon"
+        android:title="Trabajos" />
+
     <item
-        android:id="@+id/action_apply_job"
-        android:orderInCategory="100"
-        android:title="@string/action_apply_job"
-        app:showAsAction="never" />
+        android:id="@+id/navigation_post_jobs"
+        android:icon="@drawable/post_job_icon_nb"
+        android:title="Publicar" />
+
     <item
-        android:id="@+id/action_post_new_job"
-        android:orderInCategory="100"
-        android:title="@string/action_post_new_job"
-        app:showAsAction="never" />
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/user_profile_icon"
+        android:title="Perfil" />
+
 </menu>
