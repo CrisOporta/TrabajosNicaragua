@@ -50,10 +50,17 @@ public class AddUsuarioActivity extends AppCompatActivity {
 
 
         Button btnAgregar = findViewById(R.id.buttonRegister);
+        Button btnRegresar = findViewById(R.id.buttonGoBackRegisterUser);
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 addUsuario();
+            }
+        });
+        btnRegresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                regresar();
             }
         });
     }
@@ -82,7 +89,7 @@ public class AddUsuarioActivity extends AppCompatActivity {
 
 
         // Crear un objeto Usuario con los datos ingresados
-        Usuario nuevoUsuario = new Usuario(countUsuarios, nombre, apellido, email, contraseña, rol, 0); // Verificado inicialmente como 0
+        Usuario nuevoUsuario = new Usuario(nombre, apellido, email, contraseña, rol, 0); // Verificado inicialmente como 0
 
 
         if (!dbHelper.addUsuario(nuevoUsuario)) {
@@ -96,8 +103,13 @@ public class AddUsuarioActivity extends AppCompatActivity {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
             finish();
-
         }
 
     }
+
+    private void regresar(){
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    };
 }

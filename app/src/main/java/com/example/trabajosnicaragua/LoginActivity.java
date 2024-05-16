@@ -20,6 +20,10 @@ public class LoginActivity extends AppCompatActivity  {
     private static final String CORRECT_USERNAME = "admin";
     private static final String CORRECT_PASSWORD = "admin";
 
+    DBHelper dbHelper = new DBHelper(this);
+
+    int exist = 0;
+
     private EditText editTextUsername;
     private EditText editTextPassword;
 
@@ -28,20 +32,7 @@ public class LoginActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        DBHelper dbHelper = new DBHelper(this);
 
-        List<Usuario> usuarios = dbHelper.getAllUsuarios();
-
-// Ahora puedes trabajar con la lista de usuarios, por ejemplo, imprimirlos en el log:
-        for (Usuario usuario : usuarios) {
-            Log.d("Usuario", "ID: " + usuario.getId() +
-                    ", Nombre: " + usuario.getNombre() +
-                    ", Apellido: " + usuario.getApellido() +
-                    ", Email: " + usuario.getEmail() +
-                    ", Contraseña: " + usuario.getContraseña() +
-                    ", Rol: " + usuario.getRol() +
-                    ", Verificado: " + usuario.getVerificado());
-        }
 
         editTextUsername = findViewById(R.id.editTextUsername);
         editTextPassword = findViewById(R.id.editTextPassword);
@@ -63,19 +54,42 @@ public class LoginActivity extends AppCompatActivity  {
     }
 
     private void login() {
-        String username = editTextUsername.getText().toString();
+        String email = editTextUsername.getText().toString();
         String password = editTextPassword.getText().toString();
 
-        if (username.equals(CORRECT_USERNAME) && password.equals(CORRECT_PASSWORD)) {
+        List<Usuario> usuarios = dbHelper.getAllUsuarios();
+
+
+        for (Usuario usuario : usuarios) {
+            if (usuario.getEmail().toString().equals(email) && usuario.getContraseña().toString().equals(password)) {
+                exist = 1;
+            } else {
+                exist = 0;
+            }
+        }
+
+        if (email.equals(CORRECT_USERNAME) && password.equals(CORRECT_PASSWORD)) {
             Toast toast = Toast.makeText(this, "¡Credenciales correctos!", Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
             toast.show();
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();
-        } else {
+        }
+
+        if (exist == 1) {
+            Toast toast = Toast.makeText(this, "¡Credenciales correctos!", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            toast.show();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            exist = 0;
+            finish();
+        } else if (exist == 0){
             Toast.makeText(this, "¡Credenciales incorrectos!", Toast.LENGTH_SHORT).show();
         }
+
+
     }
     private void register() {
         Intent intent = new Intent(this, AddUsuarioActivity.class);

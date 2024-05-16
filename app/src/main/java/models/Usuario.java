@@ -19,6 +19,17 @@ public class Usuario {
         this.verificado = verificado;
     }
 
+    public Usuario(String nombre, String apellido, String email, String contraseña, String rol, int verificado) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.email = email;
+        this.contraseña = contraseña;
+        this.rol = rol;
+        this.verificado = verificado;
+    }
+
+
     public int getId() {
         return id;
     }
