@@ -1,31 +1,34 @@
 -- Tabla de Usuarios
 CREATE TABLE Usuarios (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id SERIAL PRIMARY KEY,
     nombre TEXT NOT NULL,
     apellido TEXT NOT NULL,
     email TEXT NOT NULL UNIQUE,
     contraseña TEXT NOT NULL,
     rol TEXT CHECK(rol IN ('reclutador', 'postulante')) NOT NULL,
-    verificado BOOLEAN DEFAULT 0
+    verificado BOOLEAN DEFAULT FALSE
 );
 
 -- Tabla de Empleos
 CREATE TABLE Empleos (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id SERIAL PRIMARY KEY,
     titulo TEXT NOT NULL,
     descripcion TEXT NOT NULL,
     ubicacion TEXT NOT NULL,
     salario DECIMAL NOT NULL,
     requisitos TEXT NOT NULL,
     reclutador_id INTEGER NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (reclutador_id) REFERENCES Usuarios(id)
 );
 
+
 -- Tabla de Documentos
 CREATE TABLE Documentos (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id SERIAL PRIMARY KEY,
     usuario_id INTEGER NOT NULL,
-    archivo BLOB NOT NULL,
+    archivo BYTEA NOT NULL,
     FOREIGN KEY (usuario_id) REFERENCES Usuarios(id)
 );
 
@@ -40,7 +43,7 @@ CREATE TABLE Favoritos (
 
 -- Tabla de Historial de Búsqueda
 CREATE TABLE HistorialBusqueda (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id SERIAL PRIMARY KEY,
     usuario_id INTEGER NOT NULL,
     terminos_busqueda TEXT,
     filtros_busqueda TEXT,
@@ -49,11 +52,11 @@ CREATE TABLE HistorialBusqueda (
 
 -- Tabla de Entrevistas
 CREATE TABLE Entrevistas (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id SERIAL PRIMARY KEY,
     usuario_id INTEGER NOT NULL,
     empleo_id INTEGER NOT NULL,
-    fecha TEXT NOT NULL,
-    hora TEXT NOT NULL,
+    fecha DATE NOT NULL,
+    hora TIME NOT NULL,
     ubicacion TEXT,
     estado TEXT DEFAULT 'Pendiente',
     FOREIGN KEY (usuario_id) REFERENCES Usuarios(id),
@@ -62,7 +65,7 @@ CREATE TABLE Entrevistas (
 
 -- Tabla de Asesoramiento
 CREATE TABLE Asesoramiento (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id SERIAL PRIMARY KEY,
     usuario_id INTEGER NOT NULL,
     consulta TEXT NOT NULL,
     respuesta TEXT,
@@ -77,7 +80,7 @@ CREATE TABLE PerfilesVerificados (
 
 -- Tabla de Alertas de Empleo
 CREATE TABLE AlertasEmpleo (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id SERIAL PRIMARY KEY,
     usuario_id INTEGER NOT NULL,
     terminos_busqueda TEXT,
     filtros_busqueda TEXT,
@@ -86,22 +89,22 @@ CREATE TABLE AlertasEmpleo (
 
 -- Tabla de Anomalías
 CREATE TABLE Anomalias (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id SERIAL PRIMARY KEY,
     usuario_id INTEGER NOT NULL,
     descripcion TEXT NOT NULL,
-    captura_pantalla BLOB,
+    captura_pantalla BYTEA,
     FOREIGN KEY (usuario_id) REFERENCES Usuarios(id)
 );
 
 -- Tabla de Idiomas
 CREATE TABLE Idiomas (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id SERIAL PRIMARY KEY,
     codigo TEXT NOT NULL UNIQUE
 );
 
 -- Tabla de Traducciones
 CREATE TABLE Traducciones (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id SERIAL PRIMARY KEY,
     idioma_id INTEGER NOT NULL,
     etiqueta TEXT NOT NULL,
     texto TEXT NOT NULL,
@@ -110,7 +113,7 @@ CREATE TABLE Traducciones (
 
 -- Tabla de Categorías de Empleo
 CREATE TABLE CategoriasEmpleo (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id SERIAL PRIMARY KEY,
     nombre TEXT NOT NULL
 );
 
@@ -125,13 +128,13 @@ CREATE TABLE EmpleosCategorias (
 
 -- Tabla de Preguntas de Habilidades
 CREATE TABLE PreguntasHabilidades (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id SERIAL PRIMARY KEY,
     pregunta TEXT NOT NULL
 );
 
 -- Tabla de Respuestas de Habilidades
 CREATE TABLE RespuestasHabilidades (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id SERIAL PRIMARY KEY,
     usuario_id INTEGER NOT NULL,
     pregunta_id INTEGER NOT NULL,
     respuesta TEXT NOT NULL,
@@ -141,7 +144,8 @@ CREATE TABLE RespuestasHabilidades (
 
 -- Tabla de ChatBots
 CREATE TABLE ChatBots (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id SERIAL PRIMARY KEY,
     pregunta TEXT NOT NULL,
     respuesta TEXT NOT NULL
 );
+

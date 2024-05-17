@@ -2,7 +2,6 @@ package com.example.trabajosnicaragua;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
 
+import data.DBHelper;
+import data.PostgreSQLHelper;
 import models.Usuario;
 
 public class LoginActivity extends AppCompatActivity  {
@@ -20,7 +21,8 @@ public class LoginActivity extends AppCompatActivity  {
     private static final String CORRECT_USERNAME = "";
     private static final String CORRECT_PASSWORD = "";
 
-    DBHelper dbHelper = new DBHelper(this);
+    DBHelper dbHelper = new DBHelper();
+
 
     int exist = 0;
 
@@ -32,6 +34,7 @@ public class LoginActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        PostgreSQLHelper db;
 
 
         editTextUsername = findViewById(R.id.editTextUsername);
