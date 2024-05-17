@@ -17,8 +17,8 @@ import models.Usuario;
 
 public class LoginActivity extends AppCompatActivity  {
 
-    private static final String CORRECT_USERNAME = "admin";
-    private static final String CORRECT_PASSWORD = "admin";
+    private static final String CORRECT_USERNAME = "";
+    private static final String CORRECT_PASSWORD = "";
 
     DBHelper dbHelper = new DBHelper(this);
 
@@ -27,31 +27,31 @@ public class LoginActivity extends AppCompatActivity  {
     private EditText editTextUsername;
     private EditText editTextPassword;
 
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_login);
-//
-//
-//
-//        editTextUsername = findViewById(R.id.editTextUsername);
-//        editTextPassword = findViewById(R.id.editTextPassword);
-//
-//        Button buttonLogin = findViewById(R.id.buttonLogin);
-//        Button buttonRegister = findViewById(R.id.buttonRegister);
-//        buttonLogin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                login();
-//            }
-//        });
-//        buttonRegister.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                register();
-//            }
-//        });
-//    }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+
+
+
+        editTextUsername = findViewById(R.id.editTextUsername);
+        editTextPassword = findViewById(R.id.editTextPassword);
+
+        Button buttonLogin = findViewById(R.id.buttonLogin);
+        Button buttonRegister = findViewById(R.id.buttonRegister);
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                login();
+            }
+        });
+        buttonRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                register();
+            }
+        });
+    }
 
     private void login() {
         String email = editTextUsername.getText().toString();
