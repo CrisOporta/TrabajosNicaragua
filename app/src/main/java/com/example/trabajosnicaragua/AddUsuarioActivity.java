@@ -1,8 +1,6 @@
 package com.example.trabajosnicaragua;
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -16,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import data.DBHelper;
 import models.Usuario;
 
 public class AddUsuarioActivity extends AppCompatActivity {
@@ -83,14 +82,10 @@ public class AddUsuarioActivity extends AppCompatActivity {
             return;
         }
 
-        DBHelper dbHelper = new DBHelper(this);
-
-        int countUsuarios = dbHelper.getUsuariosCount() + 1;
-
+        DBHelper dbHelper = new DBHelper();
 
         // Crear un objeto Usuario con los datos ingresados
         Usuario nuevoUsuario = new Usuario(nombre, apellido, email, contraseña, rol, 0); // Verificado inicialmente como 0
-
 
         if (!dbHelper.addUsuario(nuevoUsuario)) {
             Toast toast = Toast.makeText(this, "¡Error al agregar el usuario!", Toast.LENGTH_SHORT);
