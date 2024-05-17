@@ -148,3 +148,4 @@ CREATE TABLE ChatBots (
     pregunta TEXT NOT NULL,
     respuesta TEXT NOT NULL
 );
+
