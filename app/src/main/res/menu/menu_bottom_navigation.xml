@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_jobs"
+        android:icon="@drawable/jobs_icon"
+        android:title="Trabajos" />
+
+    <item
+        android:id="@+id/navigation_post_jobs"
+        android:icon="@drawable/post_job_icon_nb"
+        android:title="Publicar" />
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/user_profile_icon"
+        android:title="Perfil" />
+
+</menu>

@@ -1,28 +1,53 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<navigation xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:id="@+id/nav_graph"-->
+<!--    app:startDestination="@id/FirstFragment">-->
+
+<!--    <fragment-->
+<!--        android:id="@+id/FirstFragment"-->
+<!--        android:name="com.example.trabajosnicaragua.FirstFragment"-->
+<!--        android:label="@string/first_fragment_label"-->
+<!--        tools:layout="@layout/fragment_first">-->
+
+<!--        <action-->
+<!--            android:id="@+id/action_FirstFragment_to_SecondFragment"-->
+<!--            app:destination="@id/SecondFragment" />-->
+<!--    </fragment>-->
+<!--    <fragment-->
+<!--        android:id="@+id/SecondFragment"-->
+<!--        android:name="com.example.trabajosnicaragua.SecondFragment"-->
+<!--        android:label="@string/second_fragment_label"-->
+<!--        tools:layout="@layout/fragment_second">-->
+
+<!--        <action-->
+<!--            android:id="@+id/action_SecondFragment_to_FirstFragment"-->
+<!--            app:destination="@id/FirstFragment" />-->
+<!--    </fragment>-->
+<!--</navigation>-->
+
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@+id/navigation_jobs">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.example.trabajosnicaragua.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        android:id="@+id/navigation_jobs"
+        android:name="com.example.trabajosnicaragua.ui.jobs.JobsFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_jobs" />
 
-        <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-    </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.trabajosnicaragua.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        android:id="@+id/navigation_post_jobs"
+        android:name="com.example.trabajosnicaragua.ui.post_jobs.PostJobsFragment"
+        android:label="Post"
+        tools:layout="@layout/fragment_post_jobs" />
 
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.example.trabajosnicaragua.ui.profile.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

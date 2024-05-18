@@ -14,6 +14,7 @@ import java.util.List;
 
 import data.DBHelper;
 import data.PostgreSQLHelper;
+import es.dmoral.toasty.Toasty;
 import models.Usuario;
 
 public class LoginActivity extends AppCompatActivity  {
@@ -72,24 +73,21 @@ public class LoginActivity extends AppCompatActivity  {
         }
 
         if (email.equals(CORRECT_USERNAME) && password.equals(CORRECT_PASSWORD)) {
-            Toast toast = Toast.makeText(this, "¡Credenciales correctos!", Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-            toast.show();
+            Toasty.success(this, "¡Bienvenido!", Toast.LENGTH_SHORT, true).show();
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();
         }
 
         if (exist == 1) {
-            Toast toast = Toast.makeText(this, "¡Credenciales correctos!", Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-            toast.show();
+            Toasty.success(this, "¡Bienvenido!", Toast.LENGTH_SHORT, true).show();
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             exist = 0;
             finish();
         } else if (exist == 0){
-            Toast.makeText(this, "¡Credenciales incorrectos!", Toast.LENGTH_SHORT).show();
+            Toasty.error(this, "¡Credenciales incorrectos!", Toast.LENGTH_SHORT, true).show();
+
         }
 
 
