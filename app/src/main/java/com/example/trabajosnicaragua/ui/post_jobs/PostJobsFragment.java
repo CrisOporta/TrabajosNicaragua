@@ -13,6 +13,8 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.trabajosnicaragua.databinding.FragmentPostJobsBinding;
 import com.google.android.material.textfield.TextInputEditText;
 
+import es.dmoral.toasty.Toasty;
+
 public class PostJobsFragment extends Fragment {
 
     private FragmentPostJobsBinding binding;
@@ -46,7 +48,7 @@ public class PostJobsFragment extends Fragment {
 
         // Validar que los campos no estén vacíos
         if (jobTitle.isEmpty() || jobDescription.isEmpty() || jobLocation.isEmpty() || jobSalary.isEmpty() || jobRequirements.isEmpty()) {
-            Toast.makeText(getContext(), "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
+            Toasty.warning(getContext(), "Por favor, completa todos los campos", Toast.LENGTH_SHORT, true).show();
             return;
         }
 
@@ -54,7 +56,7 @@ public class PostJobsFragment extends Fragment {
         // Por ejemplo:
         // saveJobToDatabase(jobTitle, jobDescription, jobLocation, jobSalary, jobRequirements);
 
-        Toast.makeText(getContext(), "Trabajo publicado con éxito", Toast.LENGTH_SHORT).show();
+        Toasty.success(getContext(), "Trabajo publicado con éxito", Toast.LENGTH_SHORT, true).show();
 
         // Limpiar los campos después de la publicación
         binding.textInputJobTitle.setText("");

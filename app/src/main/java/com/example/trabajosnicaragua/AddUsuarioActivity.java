@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import data.DBHelper;
+import es.dmoral.toasty.Toasty;
 import models.Usuario;
 
 public class AddUsuarioActivity extends AppCompatActivity {
@@ -78,7 +79,8 @@ public class AddUsuarioActivity extends AppCompatActivity {
         }
 
         if (!contraseña.toString().trim().equals(confirmarContraseña.toString().trim())) {
-            Toast.makeText(this, "¡La contraseña no coincide!", Toast.LENGTH_SHORT).show();
+            Toasty.custom(this, "I'm a custom Toast", R.drawable.home_icon, R.color.black, 3, true,
+                    true).show();
             return;
         }
 

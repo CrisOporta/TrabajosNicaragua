@@ -60,13 +60,12 @@ public class MainActivity extends AppCompatActivity {
 
         switch (entryName) {
             case "settings_app":
-                Toasty.error(this, "This is an error toast.", Toast.LENGTH_SHORT, true).show();
                 return true;
             case "logout_app":
-                Toast.makeText(this, "Cerrar sesión seleccionado", Toast.LENGTH_SHORT).show();
+                Toasty.info(this, "Cerrando sesión", Toast.LENGTH_SHORT, true).show();
                 return true;
             case "exit_app":
-                Toast.makeText(this, "Salir seleccionado", Toast.LENGTH_SHORT).show();
+
                 return true;
             
             default:
