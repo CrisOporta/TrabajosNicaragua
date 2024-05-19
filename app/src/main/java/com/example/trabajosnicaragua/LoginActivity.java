@@ -19,8 +19,8 @@ import models.Usuario;
 
 public class LoginActivity extends AppCompatActivity  {
 
-    private static final String CORRECT_USERNAME = "admin";
-    private static final String CORRECT_PASSWORD = "admin";
+    private static final String CORRECT_USERNAME = "";
+    private static final String CORRECT_PASSWORD = "";
 
     DBHelper dbHelper = new DBHelper();
 
