@@ -1,5 +1,6 @@
 package com.example.trabajosnicaragua;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,6 +28,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Retrieve the variable
+        Intent intent = getIntent();
+        String user_rol = intent.getStringExtra("user_rol");
+        String user_id = intent.getStringExtra("user_id");
+
+        // User test
+        Toasty.info(this, user_id + " " + user_rol, Toast.LENGTH_SHORT, true).show();
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -60,12 +69,16 @@ public class MainActivity extends AppCompatActivity {
 
         switch (entryName) {
             case "settings_app":
+
                 return true;
             case "logout_app":
                 Toasty.info(this, "Cerrando sesión", Toast.LENGTH_SHORT, true).show();
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                finish();
                 return true;
             case "exit_app":
-
+                finish();
                 return true;
             
             default:

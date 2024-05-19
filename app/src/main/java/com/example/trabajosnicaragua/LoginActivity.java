@@ -22,11 +22,6 @@ public class LoginActivity extends AppCompatActivity  {
     private static final String CORRECT_USERNAME = "admin";
     private static final String CORRECT_PASSWORD = "admin";
 
-    DBHelper dbHelper = new DBHelper();
-
-
-    int exist = 0;
-
     private EditText editTextUsername;
     private EditText editTextPassword;
 
@@ -35,38 +30,40 @@ public class LoginActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        PostgreSQLHelper db;
-
 
         editTextUsername = findViewById(R.id.editTextUsername);
         editTextPassword = findViewById(R.id.editTextPassword);
 
         Button buttonLogin = findViewById(R.id.buttonLogin);
         Button buttonRegister = findViewById(R.id.buttonRegister);
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                login();
-            }
-        });
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 register();
             }
         });
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                login();
+            }
+        });
     }
 
     private void login() {
-        String email = editTextUsername.getText().toString();
+        String email = editTextUsername.getText().toString().toLowerCase();
         String password = editTextPassword.getText().toString();
 
-        List<Usuario> usuarios = dbHelper.getAllUsuarios();
+        DBHelper dbHelper = new DBHelper();
+        int exist = 0;
 
+        List<Usuario> usuarios = dbHelper.getAllUsuarios();
+        Usuario usuario_logeado = null;
 
         for (Usuario usuario : usuarios) {
-            if (usuario.getEmail().toString().equals(email) && usuario.getContraseña().toString().equals(password)) {
+            if (usuario.getEmail().toString().toLowerCase().equals(email) && usuario.getContraseña().toString().equals(password)) {
                 exist = 1;
+                usuario_logeado = usuario;
             } else {
                 exist = 0;
             }
@@ -82,6 +79,8 @@ public class LoginActivity extends AppCompatActivity  {
         if (exist == 1) {
             Toasty.success(this, "¡Bienvenido!", Toast.LENGTH_SHORT, true).show();
             Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("user_rol", usuario_logeado.getRol()); // Pass the variable
+            intent.putExtra("user_id", usuario_logeado.getId()); // Pass the variable
             startActivity(intent);
             exist = 0;
             finish();

@@ -13,7 +13,10 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.trabajosnicaragua.databinding.FragmentPostJobsBinding;
 import com.google.android.material.textfield.TextInputEditText;
 
+import data.DBHelper;
 import es.dmoral.toasty.Toasty;
+import models.Empleo;
+import models.Usuario;
 
 public class PostJobsFragment extends Fragment {
 
@@ -24,6 +27,8 @@ public class PostJobsFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         PostJobsViewModel postJobsViewModel =
                 new ViewModelProvider(this).get(PostJobsViewModel.class);
+
+
 
         binding = FragmentPostJobsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -48,13 +53,18 @@ public class PostJobsFragment extends Fragment {
 
         // Validar que los campos no estén vacíos
         if (jobTitle.isEmpty() || jobDescription.isEmpty() || jobLocation.isEmpty() || jobSalary.isEmpty() || jobRequirements.isEmpty()) {
-            Toasty.warning(getContext(), "Por favor, completa todos los campos", Toast.LENGTH_SHORT, true).show();
+            Toasty.warning(getContext(), "Por favor, completa todos los campos...", Toast.LENGTH_SHORT, true).show();
             return;
         }
 
-        // Aquí puedes manejar la lógica de enviar los datos a tu base de datos o backend
-        // Por ejemplo:
-        // saveJobToDatabase(jobTitle, jobDescription, jobLocation, jobSalary, jobRequirements);
+        DBHelper dbHelper = new DBHelper();
+
+        // Crear un objeto Usuario con los datos ingresados
+        Empleo nuevoEmpleo = new Empleo(jobTitle, jobDescription, jobLocation, jobSalary, jobRequirements, 0); // Verificado inicialmente como 0
+
+
+
+
 
         Toasty.success(getContext(), "Trabajo publicado con éxito", Toast.LENGTH_SHORT, true).show();
 
