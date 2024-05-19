@@ -2,10 +2,13 @@ package com.example.trabajosnicaragua;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +25,11 @@ public class LoginActivity extends AppCompatActivity  {
     private static final String CORRECT_USERNAME = "";
     private static final String CORRECT_PASSWORD = "";
 
+    private static final String TAG = "MainActivity";
+    private TextView textNameAppView;
+    private final String fullTextNameApp = "Trabajos Nicaragua.";
+    private final Handler handler = new Handler();
+    private int currentIndex = 0;
     private EditText editTextUsername;
     private EditText editTextPassword;
 
@@ -30,6 +38,9 @@ public class LoginActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        textNameAppView = findViewById(R.id.textNameApp);
+
+        startTypingAnimation();
 
         editTextUsername = findViewById(R.id.editTextUsername);
         editTextPassword = findViewById(R.id.editTextPassword);
@@ -48,6 +59,57 @@ public class LoginActivity extends AppCompatActivity  {
                 login();
             }
         });
+    }
+
+    private void startTypingAnimation() {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    if (currentIndex <= fullTextNameApp.length()) {
+                        textNameAppView.setText(fullTextNameApp.substring(0, currentIndex));
+                        currentIndex++;
+                        handler.postDelayed(this, 125); // Adjust typing speed here
+                    } else {
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                startDeletingAnimation();
+                            }
+                        }, 3000); // Pause for 3 seconds
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "Error in typing animation", e);
+                }
+            }
+        }, 125);
+    }
+
+    private void startDeletingAnimation() {
+        currentIndex -= 1;
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                try {
+
+                    if (currentIndex >= 0) {
+                        textNameAppView.setText(fullTextNameApp.substring(0, currentIndex));
+                        currentIndex--;
+                        handler.postDelayed(this, 125); // Adjust deleting speed here
+                    } else {
+                        currentIndex = 0;
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                startTypingAnimation();
+                            }
+                        }, 5000); // Pause before starting the typing animation again
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "Error in deleting animation", e);
+                }
+            }
+        }, 125);
     }
 
     private void login() {

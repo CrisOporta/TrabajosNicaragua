@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 finish();
                 return true;
             case "exit_app":
-                finish();
+                    finishAffinity();
                 return true;
 
             default:

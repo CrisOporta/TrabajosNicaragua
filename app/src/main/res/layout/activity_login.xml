@@ -1,78 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <TextView
+        android:id="@+id/textNameApp"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_margin="25dp"
+        android:fontFamily="@font/orbitron_bold"
         android:gravity="center"
-        android:orientation="vertical"
-        android:padding="40dp"
-        android:background="@drawable/bg_color_login">
+        android:text="Trabajos Nicaragua"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="349dp"
-            android:layout_height="60dp"
-            android:layout_margin="16dp"
-            android:gravity="center"
-            android:text="Trabajos Nicaragua"
-            android:textSize="36dp" />
+    <ImageView
+        android:id="@+id/imageViewIcon"
+        android:layout_width="247dp"
+        android:layout_height="172dp"
+        android:src="@drawable/login_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
 
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="252dp"
-            android:layout_height="229dp"
-            android:backgroundTint="#DC3545"
-            app:srcCompat="@drawable/logo" />
+        app:layout_constraintTop_toBottomOf="@id/textNameApp"/>
 
-        <EditText
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputEmailLoginLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintTop_toBottomOf="@id/imageViewIcon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:endIconMode="custom"
+        app:endIconDrawable="@drawable/title_icon"
+        app:layout_constraintWidth_percent="0.7">
+
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:hint="Correo electrónico"
-            android:textSize="25dp" />
+            android:hint="Correo electrónico" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputPasswordLoginLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintTop_toBottomOf="@id/textInputEmailLoginLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:endIconMode="custom"
+        app:endIconDrawable="@drawable/title_icon"
+        android:inputType="textPassword"
+        app:layout_constraintWidth_percent="0.7">
+
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/editTextUsername"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:hint="Contraseña"
-            android:inputType="textPassword"
-            android:textSize="25dp" />
+            android:hint="Contraseña" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:id="@+id/buttonLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_below="@id/editTextPassword"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
-            android:backgroundTint="#0866FF"
-            android:text="Iniciar sesión"
-            android:textSize="25dp" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonLogin"
+        android:layout_width="167dp"
+        android:layout_height="55dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="22dp"
+        android:backgroundTint="#7DCD85"
+        android:text="Iniciar sesión"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:strokeColor="@color/black"
+        app:strokeWidth="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textInputPasswordLoginLayout"
+        app:layout_constraintWidth_percent="0.7" />
 
-        <Button
-            android:id="@+id/buttonRegister"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_below="@id/editTextPassword"
-            android:layout_centerHorizontal="true"
-            android:backgroundTint="#42B72A"
-            android:text="Registrarse"
-            android:textSize="25dp" />
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="347dp"
+        android:layout_height="41dp"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:text="¿No tienes una cuenta?"
+        android:textColor="#000000"
+        android:textSize="16dp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonLogin" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonRegister"
+        android:layout_width="167dp"
+        android:layout_height="55dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="22dp"
+        android:backgroundTint="#63D2FF"
+        app:strokeColor="@color/black"
+        app:strokeWidth="2dp"
+        android:text="Registrarse"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView"
+        app:layout_constraintWidth_percent="0.7"
+        />
+
+    <TextView
+        android:id="@+id/textCopy"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:text="© 2024 NicaJobs company.SA - Todos los derechos reservados."
+        android:textColor="#000000"
+        android:textSize="12dp"
+        android:textStyle="italic|bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
 
-    </LinearLayout>
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
