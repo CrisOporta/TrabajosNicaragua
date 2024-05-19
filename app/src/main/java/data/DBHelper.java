@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import models.Empleo;
 import models.Usuario;
 
 public class DBHelper {
@@ -27,6 +28,8 @@ public class DBHelper {
         }
     }
 
+    // ----------------------------------------------------------------------------------------
+    // Usuario CRUD----------------------------------------------------------------------------------------
     // Create Usuario
     public Boolean addUsuario(Usuario usuario) {
         Connection connection = postgreSQLHelper.getConnection();
@@ -153,4 +156,140 @@ public class DBHelper {
         }
         return 0;
     }
+    // ----------------------------------------------------------------------------------------
+    // Empleos CRUD ----------------------------------------------------------------------------------------
+    // Create Empleo
+    public Boolean addEmpleo(Empleo empleo) {
+        Connection connection = postgreSQLHelper.getConnection();
+        String query = "INSERT INTO public.Empleos (titulo, descripcion, ubicacion, salario, requisitos, reclutador_id, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, empleo.getTitulo());
+            stmt.setString(2, empleo.getDescripcion());
+            stmt.setString(3, empleo.getUbicacion());
+            stmt.setString(4, empleo.getSalario());
+            stmt.setString(5, empleo.getRequisitos());
+            stmt.setInt(6, empleo.getReclutadorId());
+            stmt.setTimestamp(7, empleo.getCreatedAt());
+            stmt.setTimestamp(8, empleo.getUpdatedAt());
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            postgreSQLHelper.disconnect();
+        }
+    }
+
+    // Read Empleo by ID
+    public Empleo getEmpleoById(int id) {
+        Connection connection = postgreSQLHelper.getConnection();
+        String query = "SELECT * FROM public.Empleos WHERE id = ?";
+        Empleo empleo = null;
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                empleo = new Empleo(
+                        rs.getInt("id"),
+                        rs.getString("titulo"),
+                        rs.getString("descripcion"),
+                        rs.getString("ubicacion"),
+                        rs.getString("salario"),
+                        rs.getString("requisitos"),
+                        rs.getInt("reclutador_id"),
+                        rs.getTimestamp("created_at"),
+                        rs.getTimestamp("updated_at")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            postgreSQLHelper.disconnect();
+        }
+        return empleo;
+    }
+
+    // Update Empleo
+    public int updateEmpleo(Empleo empleo) {
+        Connection connection = postgreSQLHelper.getConnection();
+        String query = "UPDATE public.Empleos SET titulo = ?, descripcion = ?, ubicacion = ?, salario = ?, requisitos = ?, reclutador_id = ?, updated_at = ? WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, empleo.getTitulo());
+            stmt.setString(2, empleo.getDescripcion());
+            stmt.setString(3, empleo.getUbicacion());
+            stmt.setString(4, empleo.getSalario());
+            stmt.setString(5, empleo.getRequisitos());
+            stmt.setInt(6, empleo.getReclutadorId());
+            stmt.setTimestamp(7, empleo.getUpdatedAt());
+            stmt.setInt(8, empleo.getId());
+            return stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        } finally {
+            postgreSQLHelper.disconnect();
+        }
+    }
+
+    // Delete Empleo
+    public void deleteEmpleo(int id) {
+        Connection connection = postgreSQLHelper.getConnection();
+        String query = "DELETE FROM public.Empleos WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            postgreSQLHelper.disconnect();
+        }
+    }
+
+    // Read All Empleos
+    public List<Empleo> getAllEmpleos() {
+        Connection connection = postgreSQLHelper.getConnection();
+        List<Empleo> empleos = new ArrayList<>();
+        String query = "SELECT * FROM public.Empleos";
+        try (PreparedStatement stmt = connection.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                Empleo empleo = new Empleo(
+                        rs.getInt("id"),
+                        rs.getString("titulo"),
+                        rs.getString("descripcion"),
+                        rs.getString("ubicacion"),
+                        rs.getString("salario"),
+                        rs.getString("requisitos"),
+                        rs.getInt("reclutador_id"),
+                        rs.getTimestamp("created_at"),
+                        rs.getTimestamp("updated_at")
+                );
+                empleos.add(empleo);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            postgreSQLHelper.disconnect();
+        }
+        return empleos;
+    }
+
+    // Count Empleos
+    public int getEmpleosCount() {
+        Connection connection = postgreSQLHelper.getConnection();
+        String query = "SELECT COUNT(*) FROM public.Empleos";
+        try (PreparedStatement stmt = connection.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            postgreSQLHelper.disconnect();
+        }
+        return 0;
+    }
+
 }
