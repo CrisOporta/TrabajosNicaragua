@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         // Retrieve the variable
         Intent intent = getIntent();
         String user_rol = intent.getStringExtra("user_rol");
-        String user_id = intent.getStringExtra("user_id");
+        int user_id = intent.getIntExtra("user_id", -1);
 
         // User test
         Toasty.info(this, user_id + " " + user_rol, Toast.LENGTH_SHORT, true).show();
