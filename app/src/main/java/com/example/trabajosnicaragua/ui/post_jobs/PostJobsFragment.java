@@ -1,6 +1,8 @@
 package com.example.trabajosnicaragua.ui.post_jobs;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,17 +12,23 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.trabajosnicaragua.LoginActivity;
+import com.example.trabajosnicaragua.MainActivity;
 import com.example.trabajosnicaragua.databinding.FragmentPostJobsBinding;
 import com.google.android.material.textfield.TextInputEditText;
 
 import data.DBHelper;
+import data.SharedViewModel;
 import es.dmoral.toasty.Toasty;
 import models.Empleo;
 import models.Usuario;
+import androidx.lifecycle.ViewModelProvider;
 
 public class PostJobsFragment extends Fragment {
 
     private FragmentPostJobsBinding binding;
+    private SharedViewModel sharedViewModel;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -32,6 +40,9 @@ public class PostJobsFragment extends Fragment {
 
         binding = FragmentPostJobsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+
+
 
         // Configurar el botón de envío
         binding.buttonSubmitJob.setOnClickListener(new View.OnClickListener() {
@@ -59,14 +70,24 @@ public class PostJobsFragment extends Fragment {
 
         DBHelper dbHelper = new DBHelper();
 
+        // Retrieve the ViewModel
+        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+
+        // Now you can use the user_rol and user_id
+        String userRol = sharedViewModel.getUserRol();
+        int userId = sharedViewModel.getUserId();
+
         // Crear un objeto Usuario con los datos ingresados
-        Empleo nuevoEmpleo = new Empleo(jobTitle, jobDescription, jobLocation, jobSalary, jobRequirements, 0); // Verificado inicialmente como 0
+        Empleo nuevoEmpleo = new Empleo(jobTitle, jobDescription, jobLocation, jobSalary, jobRequirements, userId); // Verificado inicialmente como 0
 
+        if (!dbHelper.addEmpleo(nuevoEmpleo)) {
+            Toasty.success(getContext(), "Error al publicar empleo...", Toast.LENGTH_SHORT, true).show();
 
+        } else {
+            Toasty.error(getContext(), "Trabajo publicado con éxito", Toast.LENGTH_SHORT, true).show();
 
+        }
 
-
-        Toasty.success(getContext(), "Trabajo publicado con éxito", Toast.LENGTH_SHORT, true).show();
 
         // Limpiar los campos después de la publicación
         binding.textInputJobTitle.setText("");

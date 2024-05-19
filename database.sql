@@ -15,7 +15,7 @@ CREATE TABLE Empleos (
     titulo TEXT NOT NULL,
     descripcion TEXT NOT NULL,
     ubicacion TEXT NOT NULL,
-    salario DECIMAL NOT NULL,
+    salario TEXT NOT NULL,
     requisitos TEXT NOT NULL,
     reclutador_id INTEGER NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

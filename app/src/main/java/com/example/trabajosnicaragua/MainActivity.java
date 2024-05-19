@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -19,11 +20,15 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.trabajosnicaragua.databinding.ActivityMainBinding;
 
+import data.SharedViewModel;
 import es.dmoral.toasty.Toasty;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+
+    private SharedViewModel sharedViewModel;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +55,11 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+        // Setup ViewModel
+        sharedViewModel = new ViewModelProvider(this).get(SharedViewModel.class);
+        sharedViewModel.setUserRol(user_rol);
+        sharedViewModel.setUserId(user_id);
 
     }
 
@@ -80,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
             case "exit_app":
                 finish();
                 return true;
-            
+
             default:
                 return super.onOptionsItemSelected(item);
         }
