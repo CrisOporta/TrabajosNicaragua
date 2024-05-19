@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 Toasty.info(this, "Cerrando sesión", Toast.LENGTH_SHORT, true).show();
                 return true;
             case "exit_app":
-
+                    finishAffinity();
                 return true;
             
             default:
