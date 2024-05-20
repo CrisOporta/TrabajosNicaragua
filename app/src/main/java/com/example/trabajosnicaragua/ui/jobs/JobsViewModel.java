@@ -9,25 +9,34 @@ import com.example.trabajosnicaragua.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import data.DBHelper;
+import models.Empleo;
+import models.Usuario;
+
 public class JobsViewModel extends ViewModel {
 
-    private final MutableLiveData<List<Job>> jobsList;
+    private final MutableLiveData<List<Empleo>> jobsList;
 
     public JobsViewModel() {
         jobsList = new MutableLiveData<>();
+
+
+        // Agregar todos los trabajos
+        DBHelper dbHelper = new DBHelper();
+
         // Inicializa con algunos datos de ejemplo
-        List<Job> exampleJobs = new ArrayList<>();
-        exampleJobs.add(new Job("Programador Backend", "Se solicita un programador Backend con conocimientos en .NET", R.drawable.dev_job_image));
-        exampleJobs.add(new Job("Profesor Historia", "Se solicita profesor de Historia de Nicaragua", R.drawable.teacher_job_image));
-        exampleJobs.add(new Job("Contador", "Necesitamos contador con 3 años de experiencia", R.drawable.accountant_job_image));
-        jobsList.setValue(exampleJobs);
+        List<Empleo> exampleJobs = dbHelper.getAllEmpleos();
+
+        if(exampleJobs != null)
+            jobsList.setValue(exampleJobs);
+
     }
 
-    public LiveData<List<Job>> getJobsList() {
+    public LiveData<List<Empleo>> getJobsList() {
         return jobsList;
     }
 
-    public void setJobsList(List<Job> jobs) {
+    public void setJobsList(List<Empleo> jobs) {
         jobsList.setValue(jobs);
     }
 }

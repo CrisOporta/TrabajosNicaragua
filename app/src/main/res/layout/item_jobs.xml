@@ -26,15 +26,49 @@
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:text="Sr. React Developer" />
+            android:text="Titulo" />
 
         <TextView
             android:id="@+id/text_view_job_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14sp"
-            android:text="Buscamos un proeficiente developer que tenga habilidades usando tecnologias web" />
+            android:text="Descripción" />
 
+        <TextView
+            android:id="@+id/text_view_job_ubication"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="Ubicación" />
+
+        <TextView
+            android:id="@+id/text_view_job_salary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="Salario" />
+
+        <TextView
+            android:id="@+id/text_view_job_requirements"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="Requerimientos" />
+
+        <TextView
+            android:id="@+id/text_view_job_createdat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="Fecha de publicación" />
+
+        <TextView
+            android:id="@+id/text_view_job_updatedat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="Fecha de actualización" />
     </LinearLayout>
 
 </LinearLayout>

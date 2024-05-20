@@ -13,11 +13,13 @@ import com.example.trabajosnicaragua.R;
 
 import java.util.List;
 
+import models.Empleo;
+
 public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.JobViewHolder> {
 
-    private List<Job> jobsList;
+    private List<Empleo> jobsList;
 
-    public JobsAdapter(List<Job> jobsList) {
+    public JobsAdapter(List<Empleo> jobsList) {
         this.jobsList = jobsList;
     }
 
@@ -30,10 +32,14 @@ public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.JobViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull JobViewHolder holder, int position) {
-        Job job = jobsList.get(position);
-        holder.textViewJobTitle.setText(job.getTitle());
-        holder.textViewJobDescription.setText(job.getDescription());
-        holder.imageViewJob.setImageResource(job.getImageResId()); // Establecer la imagen local
+        Empleo job = jobsList.get(position);
+        holder.textViewJobTitle.setText(job.getTitulo());
+        holder.textViewJobDescription.setText(job.getDescripcion());
+        holder.textViewJobUbication.setText(job.getUbicacion());
+        holder.textViewJobSalary.setText(job.getSalario());
+        holder.textViewJobRequirements.setText(job.getRequisitos());
+        holder.textViewJobCreatedAt.setText(job.getCreatedAt().toString());
+        holder.textViewJobUpdatedAt.setText(job.getUpdatedAt().toString());
     }
 
     @Override
@@ -41,7 +47,7 @@ public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.JobViewHolder>
         return jobsList.size();
     }
 
-    public void updateJobsList(List<Job> jobs) {
+    public void updateJobsList(List<Empleo> jobs) {
         jobsList = jobs;
         notifyDataSetChanged();
     }
@@ -49,12 +55,22 @@ public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.JobViewHolder>
     public static class JobViewHolder extends RecyclerView.ViewHolder {
         TextView textViewJobTitle;
         TextView textViewJobDescription;
+        TextView textViewJobUbication;
+        TextView textViewJobSalary;
+        TextView textViewJobRequirements;
+        TextView textViewJobCreatedAt;
+        TextView textViewJobUpdatedAt;
         ImageView imageViewJob;
 
         public JobViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewJobTitle = itemView.findViewById(R.id.text_view_job_title);
             textViewJobDescription = itemView.findViewById(R.id.text_view_job_description);
+            textViewJobUbication = itemView.findViewById(R.id.text_view_job_ubication);
+            textViewJobSalary = itemView.findViewById(R.id.text_view_job_salary);
+            textViewJobRequirements = itemView.findViewById(R.id.text_view_job_requirements);
+            textViewJobCreatedAt = itemView.findViewById(R.id.text_view_job_createdat);
+            textViewJobUpdatedAt = itemView.findViewById(R.id.text_view_job_updatedat);
             imageViewJob = itemView.findViewById(R.id.image_view_job);
         }
     }

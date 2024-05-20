@@ -126,6 +126,7 @@ public class LoginActivity extends AppCompatActivity  {
             if (usuario.getEmail().toString().toLowerCase().equals(email) && usuario.getContraseña().toString().equals(password)) {
                 exist = 1;
                 usuario_logeado = usuario;
+                break;
             } else {
                 exist = 0;
             }

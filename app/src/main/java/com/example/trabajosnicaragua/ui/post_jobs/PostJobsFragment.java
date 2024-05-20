@@ -81,10 +81,10 @@ public class PostJobsFragment extends Fragment {
         Empleo nuevoEmpleo = new Empleo(jobTitle, jobDescription, jobLocation, jobSalary, jobRequirements, userId); // Verificado inicialmente como 0
 
         if (!dbHelper.addEmpleo(nuevoEmpleo)) {
-            Toasty.success(getContext(), "Error al publicar empleo...", Toast.LENGTH_SHORT, true).show();
+            Toasty.error(getContext(), "Error al publicar empleo...", Toast.LENGTH_SHORT, true).show();
 
         } else {
-            Toasty.error(getContext(), "Trabajo publicado con éxito", Toast.LENGTH_SHORT, true).show();
+            Toasty.success(getContext(), "Trabajo publicado con éxito", Toast.LENGTH_SHORT, true).show();
 
         }
 
