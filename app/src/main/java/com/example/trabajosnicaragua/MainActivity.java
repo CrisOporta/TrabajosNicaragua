@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
 
-//    private SharedViewModel sharedViewModel;
+    private SharedViewModel sharedViewModel;
 
     private SharedJobsViewModel sharedJobsViewModel;
 
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         int user_id = intent.getIntExtra("user_id", -1);
 
         // User test
-        Toasty.info(this, user_id + " " + user_rol, Toast.LENGTH_SHORT, true).show();
+        //Toasty.info(this, user_id + " " + user_rol, Toast.LENGTH_SHORT, true).show();
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -61,7 +61,9 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
 
         sharedJobsViewModel = new ViewModelProvider(this).get(SharedJobsViewModel.class);
-//        sharedJobsViewModel.setUserRol(user_rol);
+        sharedViewModel = new ViewModelProvider(this).get(SharedViewModel.class);
+        sharedViewModel.setUserId(user_id);
+        sharedViewModel.setUserRol(user_rol);
         sharedJobsViewModel.setUserId(user_id);
     }
 

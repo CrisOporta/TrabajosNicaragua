@@ -33,7 +33,7 @@ public class SharedJobsViewModel extends ViewModel {
     public void addJob(Empleo job) {
         List<Empleo> currentJobs = jobsList.getValue();
         if (currentJobs != null) {
-            currentJobs.add(job);
+            currentJobs.add(0, job);
             jobsList.setValue(currentJobs);
         }
     }

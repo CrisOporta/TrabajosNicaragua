@@ -33,6 +33,7 @@ public class ProfileFragment extends Fragment {
 
     private Usuario usuario;
     private int userId;
+    private String userRol;
     DBHelper dbHelper = new DBHelper();
 
 
@@ -67,9 +68,7 @@ public class ProfileFragment extends Fragment {
         binding.textProfileNameLayout.setEndIconOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextInputEditText editText = showEditDialog("Editar nombres", binding.textProfileName.getText().toString(), binding.textProfileName);
-                usuario.setNombre(editText.getText().toString());
-                dbHelper.updateUsuario(usuario);
+                showEditDialog("Editar nombres", binding.textProfileName.getText().toString(), binding.textProfileName);
             }
         });
 
@@ -96,7 +95,7 @@ public class ProfileFragment extends Fragment {
         });
     }
 
-    private TextInputEditText showEditDialog(String title, String currentText, final TextInputEditText editText) {
+    private void showEditDialog(String title, String currentText, final TextInputEditText editText) {
         LayoutInflater inflater = LayoutInflater.from(requireContext());
         View dialogView = inflater.inflate(R.layout.dialog_edit_text, null);
         final TextInputEditText dialogEditText = dialogView.findViewById(R.id.edit_text);
@@ -131,7 +130,6 @@ public class ProfileFragment extends Fragment {
                 })
                 .setNegativeButton("Cancelar", null)
                 .show();
-        return editText;
     }
 
     public static boolean isValidEmail(String email) {

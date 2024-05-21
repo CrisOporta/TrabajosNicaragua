@@ -16,14 +16,23 @@ import com.example.trabajosnicaragua.ui.jobs.SharedJobsViewModel;
 
 
 import data.DBHelper;
+import data.SharedViewModel;
 import es.dmoral.toasty.Toasty;
 import models.Empleo;
+import models.Usuario;
 
 
 public class PostJobsFragment extends Fragment {
 
     private FragmentPostJobsBinding binding;
     private SharedJobsViewModel sharedJobsViewModel;
+
+
+    private SharedViewModel sharedViewModel;
+
+
+    private int userId;
+    private String userRol;
 
 
     @Override
@@ -38,6 +47,20 @@ public class PostJobsFragment extends Fragment {
         View root = binding.getRoot();
 
 
+        // Retrieve the ViewModel
+        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+
+        // Now you can use the user_rol and user_id
+        String userRol = sharedViewModel.getUserRol();
+
+        if(userRol.equals("postulante")){
+            binding.textInputJobTitle.setEnabled(false);
+            binding.textInputJobDescription.setEnabled(false);
+            binding.textInputJobLocation.setEnabled(false);
+            binding.textInputJobSalary.setEnabled(false);
+            binding.textInputJobRequirements.setEnabled(false);
+            binding.buttonSubmitJob.setEnabled(false);
+        }
 
 
         // Configurar el botón de envío
@@ -66,11 +89,8 @@ public class PostJobsFragment extends Fragment {
 
         DBHelper dbHelper = new DBHelper();
 
-        // Retrieve the ViewModel
-//        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
-//
-//        // Now you can use the user_rol and user_id
-//        String userRol = sharedViewModel.getUserRol();
+
+
         int userId = sharedJobsViewModel.getUserId();
         Empleo nuevoEmpleo = new Empleo(jobTitle, jobDescription, jobLocation, jobSalary, jobRequirements, userId); // Verificado inicialmente como 0
 
