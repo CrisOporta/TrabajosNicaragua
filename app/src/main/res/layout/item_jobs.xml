@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="16dp">
+
 
     <ImageView
         android:id="@+id/image_view_job"
@@ -47,28 +49,46 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14sp"
-            android:text="Salario" />
+            android:text="" />
 
-        <TextView
-            android:id="@+id/text_view_job_requirements"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:text="Requerimientos" />
 
-        <TextView
-            android:id="@+id/text_view_job_createdat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:text="Fecha de publicación" />
 
-        <TextView
-            android:id="@+id/text_view_job_updatedat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:text="Fecha de actualización" />
+    <!--        <TextView-->
+<!--            android:id="@+id/text_view_job_requirements"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textSize="14sp"-->
+<!--            android:text="" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/text_view_job_createdat"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textSize="14sp"-->
+<!--            android:text="" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/text_view_job_updatedat"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textSize="14sp"-->
+<!--            android:text="" />-->
     </LinearLayout>
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_edit"
+        style="@style/Widget.Material3.Button.Icon"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        app:backgroundTint="#63D2FF"
+        android:contentDescription="Editar"
+        android:padding="8dp"
+        app:strokeColor="@color/black"
+        app:strokeWidth="2dp"
+        app:icon="@drawable/edit_icon"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:iconSize="24dp"
+        app:iconTint="#262626" />
 </LinearLayout>
