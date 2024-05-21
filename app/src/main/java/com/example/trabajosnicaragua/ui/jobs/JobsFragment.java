@@ -19,12 +19,12 @@ public class JobsFragment extends Fragment {
 
     private FragmentJobsBinding binding;
     private JobsAdapter jobsAdapter;
-    private JobsViewModel jobsViewModel;
+    private SharedJobsViewModel sharedJobsViewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        jobsViewModel = new ViewModelProvider(this).get(JobsViewModel.class);
+        sharedJobsViewModel = new ViewModelProvider(requireActivity()).get(SharedJobsViewModel.class);
 
         binding = FragmentJobsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -41,7 +41,7 @@ public class JobsFragment extends Fragment {
         recyclerView.addItemDecoration(new DividerItemDecoration(requireContext()));
 
         // Observar los cambios en la lista de trabajos
-        jobsViewModel.getJobsList().observe(getViewLifecycleOwner(), jobs -> {
+        sharedJobsViewModel.getJobsList().observe(getViewLifecycleOwner(), jobs -> {
             jobsAdapter.updateJobsList(jobs);
         });
 
