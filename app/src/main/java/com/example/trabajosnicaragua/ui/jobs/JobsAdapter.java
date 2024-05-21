@@ -19,6 +19,7 @@ public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.JobViewHolder>
 
     private List<Empleo> jobsList;
 
+
     public JobsAdapter(List<Empleo> jobsList) {
         this.jobsList = jobsList;
     }
@@ -36,10 +37,10 @@ public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.JobViewHolder>
         holder.textViewJobTitle.setText(job.getTitulo());
         holder.textViewJobDescription.setText(job.getDescripcion());
         holder.textViewJobUbication.setText(job.getUbicacion());
-        holder.textViewJobSalary.setText(job.getSalario());
-        holder.textViewJobRequirements.setText(job.getRequisitos());
-        holder.textViewJobCreatedAt.setText(job.getCreatedAt().toString());
-        holder.textViewJobUpdatedAt.setText(job.getUpdatedAt().toString());
+//        holder.textViewJobSalary.setText(job.getSalario());
+//        holder.textViewJobRequirements.setText(job.getRequisitos());
+//        holder.textViewJobCreatedAt.setText(job.getCreatedAt().toString());
+//        holder.textViewJobUpdatedAt.setText(job.getUpdatedAt().toString());
     }
 
     @Override
@@ -67,11 +68,12 @@ public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.JobViewHolder>
             textViewJobTitle = itemView.findViewById(R.id.text_view_job_title);
             textViewJobDescription = itemView.findViewById(R.id.text_view_job_description);
             textViewJobUbication = itemView.findViewById(R.id.text_view_job_ubication);
-            textViewJobSalary = itemView.findViewById(R.id.text_view_job_salary);
-            textViewJobRequirements = itemView.findViewById(R.id.text_view_job_requirements);
-            textViewJobCreatedAt = itemView.findViewById(R.id.text_view_job_createdat);
-            textViewJobUpdatedAt = itemView.findViewById(R.id.text_view_job_updatedat);
+//            textViewJobSalary = itemView.findViewById(R.id.text_view_job_salary);
+//            textViewJobRequirements = itemView.findViewById(R.id.text_view_job_requirements);
+//            textViewJobCreatedAt = itemView.findViewById(R.id.text_view_job_createdat);
+//            textViewJobUpdatedAt = itemView.findViewById(R.id.text_view_job_updatedat);
             imageViewJob = itemView.findViewById(R.id.image_view_job);
         }
     }
+
 }
