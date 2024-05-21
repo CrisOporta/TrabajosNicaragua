@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.trabajosnicaragua.ui.jobs.SharedJobsViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.lifecycle.ViewModelProvider;
@@ -27,7 +29,9 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
 
-    private SharedViewModel sharedViewModel;
+//    private SharedViewModel sharedViewModel;
+
+    private SharedJobsViewModel sharedJobsViewModel;
 
 
     @Override
@@ -56,11 +60,9 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        // Setup ViewModel
-        sharedViewModel = new ViewModelProvider(this).get(SharedViewModel.class);
-        sharedViewModel.setUserRol(user_rol);
-        sharedViewModel.setUserId(user_id);
-
+        sharedJobsViewModel = new ViewModelProvider(this).get(SharedJobsViewModel.class);
+//        sharedJobsViewModel.setUserRol(user_rol);
+        sharedJobsViewModel.setUserId(user_id);
     }
 
     @Override
