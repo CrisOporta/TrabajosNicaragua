@@ -85,8 +85,8 @@ public class PostJobsFragment extends Fragment {
 
         } else {
             Toasty.success(getContext(), "Trabajo publicado con éxito", Toast.LENGTH_SHORT, true).show();
-
         }
+
 
 
         // Limpiar los campos después de la publicación

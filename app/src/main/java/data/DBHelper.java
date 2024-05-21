@@ -250,7 +250,7 @@ public class DBHelper {
     public List<Empleo> getAllEmpleos() {
         Connection connection = postgreSQLHelper.getConnection();
         List<Empleo> empleos = new ArrayList<>();
-        String query = "SELECT * FROM public.Empleos";
+        String query = "SELECT * FROM public.Empleos ORDER BY id DESC";
         try (PreparedStatement stmt = connection.prepareStatement(query);
              ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {

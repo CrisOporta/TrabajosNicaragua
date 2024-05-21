@@ -20,18 +20,44 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import data.DBHelper;
+import data.SharedViewModel;
 import es.dmoral.toasty.Toasty;
+import models.Usuario;
 
 public class ProfileFragment extends Fragment {
 
     private FragmentProfileBinding binding;
+
+    private SharedViewModel sharedViewModel;
+
+    private Usuario usuario;
+    private int userId;
+    DBHelper dbHelper = new DBHelper();
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         ProfileViewModel homeViewModel =
                 new ViewModelProvider(this).get(ProfileViewModel.class);
 
+
+        // Retrieve the ViewModel
+        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+
+        // Now you can use the user_rol and user_id
+        userId = sharedViewModel.getUserId();
+
+        usuario = dbHelper.getUsuarioById(userId);
+
         binding = FragmentProfileBinding.inflate(inflater, container, false);
+
+        binding.textProfileName.setText(usuario.getNombre());
+        binding.textProfileLastname.setText(usuario.getApellido());
+        binding.textProfileEmail.setText(usuario.getEmail());
+        binding.textProfilePassword.setText(usuario.getContraseña());
+
+
         View root = binding.getRoot();
 
         setupEndIconClickListeners();
@@ -41,7 +67,9 @@ public class ProfileFragment extends Fragment {
         binding.textProfileNameLayout.setEndIconOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showEditDialog("Editar nombres", binding.textProfileName.getText().toString(), binding.textProfileName);
+                TextInputEditText editText = showEditDialog("Editar nombres", binding.textProfileName.getText().toString(), binding.textProfileName);
+                usuario.setNombre(editText.getText().toString());
+                dbHelper.updateUsuario(usuario);
             }
         });
 
@@ -56,6 +84,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 showEditDialog("Editar Correo electrónico", binding.textProfileEmail.getText().toString(), binding.textProfileEmail);
+
             }
         });
 
@@ -67,7 +96,7 @@ public class ProfileFragment extends Fragment {
         });
     }
 
-    private void showEditDialog(String title, String currentText, final TextInputEditText editText) {
+    private TextInputEditText showEditDialog(String title, String currentText, final TextInputEditText editText) {
         LayoutInflater inflater = LayoutInflater.from(requireContext());
         View dialogView = inflater.inflate(R.layout.dialog_edit_text, null);
         final TextInputEditText dialogEditText = dialogView.findViewById(R.id.edit_text);
@@ -80,8 +109,9 @@ public class ProfileFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String newValue = dialogEditText.getText().toString().trim();
-                        if(newValue.isEmpty() || newValue.length() < 5){
-                            Toasty.error(getContext(), "El campo no debe estar vacío o con menos de 5 carácteres", Toast.LENGTH_SHORT, true).show();
+
+                        if(newValue.isEmpty() || newValue.length() < 3){
+                            Toasty.error(getContext(), "El campo no debe estar vacío o con menos de 3 carácteres", Toast.LENGTH_SHORT, true).show();
                         }
                         else {
                             if(title.equals("Editar Correo electrónico") && !isValidEmail(newValue)){
@@ -89,12 +119,19 @@ public class ProfileFragment extends Fragment {
                                 return;
                             }
                             editText.setText(newValue);
+
+
+
+
+
+
                             Toasty.success(getContext(), "Guardado", Toast.LENGTH_SHORT, true).show();
                         }
                     }
                 })
                 .setNegativeButton("Cancelar", null)
                 .show();
+        return editText;
     }
 
     public static boolean isValidEmail(String email) {
