@@ -24,7 +24,6 @@ public class LoginActivity extends AppCompatActivity  {
 
     private static final String CORRECT_USERNAME = "";
     private static final String CORRECT_PASSWORD = "";
-
     private static final String TAG = "MainActivity";
     private TextView textNameAppView;
     private final String fullTextNameApp = "Trabajos Nicaragua.";
@@ -33,10 +32,16 @@ public class LoginActivity extends AppCompatActivity  {
     private EditText editTextUsername;
     private EditText editTextPassword;
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+
+
 
         textNameAppView = findViewById(R.id.textNameApp);
 
@@ -59,6 +64,38 @@ public class LoginActivity extends AppCompatActivity  {
                 login();
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        checkSession();
+    }
+
+    private void checkSession() {
+        //check if user is logged in
+        //if user is logged in --> move to mainActivity
+
+        SessionManagement sessionManagement = new SessionManagement(LoginActivity.this);
+        int userID = sessionManagement.getSession();
+
+        if(userID != -1){
+            //user id logged in and so move to mainActivity
+            DBHelper dbHelper = new DBHelper();
+            Usuario usuarioYaLogeado = dbHelper.getUsuarioById(userID);
+            moveToMainActivity(usuarioYaLogeado);
+        }
+        else{
+            //do nothing
+        }
+    }
+    private void moveToMainActivity(Usuario usuario) {
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("user_rol", usuario.getRol()); // Pass the variable
+        intent.putExtra("user_id", usuario.getId()); // Pass the variable
+        startActivity(intent);
     }
 
     private void startTypingAnimation() {
@@ -126,6 +163,9 @@ public class LoginActivity extends AppCompatActivity  {
             if (usuario.getEmail().toString().toLowerCase().equals(email) && usuario.getContraseña().toString().equals(password)) {
                 exist = 1;
                 usuario_logeado = usuario;
+                //1. login and save session
+                SessionManagement sessionManagement = new SessionManagement(LoginActivity.this);
+                sessionManagement.saveSession(usuario_logeado);
                 break;
             } else {
                 exist = 0;
@@ -142,6 +182,7 @@ public class LoginActivity extends AppCompatActivity  {
         if (exist == 1) {
             Toasty.success(this, "¡Bienvenido!", Toast.LENGTH_SHORT, true).show();
             Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra("user_rol", usuario_logeado.getRol()); // Pass the variable
             intent.putExtra("user_id", usuario_logeado.getId()); // Pass the variable
             startActivity(intent);
@@ -159,4 +200,6 @@ public class LoginActivity extends AppCompatActivity  {
         startActivity(intent);
         finish();
     }
+
+
 }

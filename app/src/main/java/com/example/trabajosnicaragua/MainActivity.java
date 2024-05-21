@@ -86,8 +86,12 @@ public class MainActivity extends AppCompatActivity {
 
                 return true;
             case "logout_app":
+                //this method will remove session and open login screen
+                SessionManagement sessionManagement = new SessionManagement(MainActivity.this);
+                sessionManagement.removeSession();
                 Toasty.info(this, "Cerrando sesión", Toast.LENGTH_SHORT, true).show();
                 Intent intent = new Intent(this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();
                 return true;
