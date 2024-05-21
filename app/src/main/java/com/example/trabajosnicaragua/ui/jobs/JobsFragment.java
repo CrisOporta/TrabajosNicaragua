@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -15,16 +16,18 @@ import com.example.trabajosnicaragua.databinding.FragmentJobsBinding;
 
 import java.util.ArrayList;
 
+import models.Empleo;
+
 public class JobsFragment extends Fragment {
 
     private FragmentJobsBinding binding;
     private JobsAdapter jobsAdapter;
-    private JobsViewModel jobsViewModel;
+    private SharedJobsViewModel sharedJobsViewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        jobsViewModel = new ViewModelProvider(this).get(JobsViewModel.class);
+        sharedJobsViewModel = new ViewModelProvider(requireActivity()).get(SharedJobsViewModel.class);
 
         binding = FragmentJobsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -41,11 +44,19 @@ public class JobsFragment extends Fragment {
         recyclerView.addItemDecoration(new DividerItemDecoration(requireContext()));
 
         // Observar los cambios en la lista de trabajos
-        jobsViewModel.getJobsList().observe(getViewLifecycleOwner(), jobs -> {
+        sharedJobsViewModel.getJobsList().observe(getViewLifecycleOwner(), jobs -> {
             jobsAdapter.updateJobsList(jobs);
         });
 
         return root;
+    }
+
+    private View getViewByPosition(int position, RecyclerView recyclerView) {
+        RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForAdapterPosition(position);
+        if (viewHolder == null) {
+            return null;
+        }
+        return viewHolder.itemView;
     }
 
     @Override
